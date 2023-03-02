@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "3NGs7QqjUigkV/sdJbDtgzgRV9r6YOd8BWWto2hGE+U=",
+  "Source": "manuel_fajardo_prueba_tecnica",
+  "BasePath": "_content/manuel_fajardo_prueba_tecnica",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "manuel_fajardo_prueba_tecnica\\wwwroot",
+      "Source": "manuel_fajardo_prueba_tecnica",
+      "ContentRoot": "C:\\Users\\Xiza\\Desktop\\manuel_fajardo_prueba_tecnica\\api\\wwwroot\\",
+      "BasePath": "_content/manuel_fajardo_prueba_tecnica",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

@@ -1,0 +1,57 @@
+<section class="flex flex-col justify-center items-center w-full p-5">
+  <span class="font-bold text-4xl underline mb-4">Nueva Encuesta</span>
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()" class="w-96 rounded-lg border-2 bg-blue-50 p-4 shadow-lg">
+    <div class="mb-4 flex flex-wrap w-full justify-start items-center">
+      <label for="idPerson" class="font-bold text-base mb-2 w-full">Encuestado:</label>
+      <select id="person" formControlName="idPerson"
+        class="bg-transparent border-[1px] border-blue-400 bg-blue-100 rounded-lg px-2 text-base w-2/3 py-[2.5px]">
+        <option *ngFor="let person of people" [value]="person.idPerson">{{person.name}}</option>
+      </select>
+      <app-create-person-modal class="ml-auto" [getPeople]="getPeople"></app-create-person-modal>
+      <div *ngIf="isRequiredField('idPerson')" class="text-red-500 text-sm font-semibold">
+        {{isRequiredField('idPerson')}}
+      </div>
+    </div>
+    <div class="mb-4 flex flex-wrap w-full justify-start items-center">
+      <label for="idBranch" class="font-bold text-base mb-2 w-full">Sucursal:</label>
+      <select id="branch" formControlName="idBranch"
+        class="bg-transparent border-[1px] border-blue-400 bg-blue-100 rounded-lg px-2 text-base w-full py-[2.5px]">
+        <option *ngFor="let branch of branches" [value]="branch.idBranch">{{branch.name}}</option>
+      </select>
+      <div *ngIf="isRequiredField('idBranch')" class="text-red-500 text-sm font-semibold">
+        {{isRequiredField('idBranch')}}
+      </div>
+    </div>
+    <div *ngFor="let question of questions" class="mb-4 flex flex-col w-full justify-center items-start">
+      <label for="question{{questions.indexOf(question) + 1}}"
+        class="font-bold text-base mb-2">P{{questions.indexOf(question) + 1}}: {{question.content}}</label>
+      <div *ngIf="question.type === 1" class="flex flex-row justify-center items-center w-full">
+        <div class="flex flex-col justify-center items-center w-1/2">
+          <label for="question{{questions.indexOf(question) + 1}}-yes" class="font-bold text-base mb-2">Sí</label>
+          <input type="radio" id="question{{questions.indexOf(question) + 1}}-yes"
+            formControlName="question{{questions.indexOf(question) + 1}}" value="Y">
+        </div>
+        <div class="flex flex-col justify-center items-center w-1/2">
+          <label for="question{{questions.indexOf(question) + 1}}-no" class="font-bold text-base mb-2">No</label>
+          <input type="radio" id="question{{questions.indexOf(question) + 1}}-no"
+            formControlName="question{{questions.indexOf(question) + 1}}" value="N">
+        </div>
+      </div>
+      <input *ngIf="question.type === 2" type="range" id="question{{questions.indexOf(question) + 1}}"
+        formControlName="question{{questions.indexOf(question) + 1}}" min="0" max="10" step="1" value="5"
+        class="w-full h-2 rounded-lg cursor-pointer">
+      <textarea *ngIf="question.type === 3" id="question{{questions.indexOf(question) + 1}}"
+        formControlName="question{{questions.indexOf(question) + 1}}"
+        class="bg-transparent border-[1px] border-blue-400 bg-blue-100 rounded-lg px-2 text-base w-full h-20">
+      </textarea>
+      <div *ngIf="isRequiredField(getQuestionAttribute(questions.indexOf(question) + 1))"
+        class="text-red-500 text-sm font-semibold">
+        {{isRequiredField(getQuestionAttribute(questions.indexOf(question) + 1))}}
+      </div>
+    </div>
+    <button type="submit"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded active:bg-blue-900 flex mx-auto">
+      Enviar
+    </button>
+  </form>
+</section>

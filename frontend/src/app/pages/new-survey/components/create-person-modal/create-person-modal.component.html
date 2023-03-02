@@ -1,0 +1,95 @@
+<button type="button" (click)="toggleModal()"
+  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded active:bg-blue-700 flex mx-auto">
+  Agregar
+</button>
+<div *ngIf="showModal"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+  <div class="relative w-80 my-6 mx-auto">
+    <!--content-->
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <!--header-->
+      <div class="flex items-start justify-between py-3 px-5 border-b border-solid border-slate-200 rounded-t">
+        <span class="text-2xl font-semibold">
+          Agregar persona
+        </span>
+        <button
+          class="p-1 ml-auto border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none relative"
+          (click)="toggleModal()">
+          <span
+            class="text-black h-6 w-6 text-3xl block absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+            ×
+          </span>
+        </button>
+      </div>
+      <!--body-->
+      <form [formGroup]="registerForm" class="bg-transparent p-5">
+        <div class="mb-4 flex flex-wrap w-full justify-start items-center">
+          <label for="identification" class="font-bold text-base mb-2 w-full">CI:</label>
+          <input id="branch" formControlName="identification"
+            class="bg-transparent border-[1px] border-blue-400 bg-blue-100 rounded-lg px-2 text-base w-full py-[2.5px]" />
+          <div *ngIf="isRequiredField('identification')" class="text-red-500 text-sm font-semibold">
+            {{isRequiredField('identification')}}
+          </div>
+          <div *ngIf="isMaxLength('identification', 10)" class="text-red-500 text-sm font-semibold">
+            {{isMaxLength('identification', 10)}}
+          </div>
+          <div *ngIf="isMinLength('identification')" class="text-red-500 text-sm font-semibold">
+            {{isMinLength('identification')}}
+          </div>
+        </div>
+        <div class="mb-4 flex flex-wrap w-full justify-start items-center">
+          <label for="name" class="font-bold text-base mb-2 w-full">Nombre:</label>
+          <input id="branch" formControlName="name"
+            class="bg-transparent border-[1px] border-blue-400 bg-blue-100 rounded-lg px-2 text-base w-full py-[2.5px]" />
+          <div *ngIf="isRequiredField('name')" class="text-red-500 text-sm font-semibold">
+            {{isRequiredField('name')}}
+          </div>
+          <div *ngIf="isMaxLength('name', 50)" class="text-red-500 text-sm font-semibold">
+            {{isMaxLength('name', 50)}}
+          </div>
+        </div>
+        <div class="mb-4 flex flex-col w-full justify-center items-start">
+          <label for="sex" class="font-bold text-base mb-2">Sexo:</label>
+          <div class="flex flex-row justify-center items-center w-full">
+            <div class="flex flex-col justify-center items-center w-1/2">
+              <label for="sex-m" class="font-bold text-base mb-2">M</label>
+              <input type="radio" id="sex-m" formControlName="sex" value="M">
+            </div>
+            <div class="flex flex-col justify-center items-center w-1/2">
+              <label for="sex-f" class="font-bold text-base mb-2">F</label>
+              <input type="radio" id="sex-f" formControlName="sex" value="F">
+            </div>
+          </div>
+        </div>
+        <div class="mb-4 flex flex-wrap w-full justify-start items-center">
+          <label for="age" class="font-bold text-base mb-2 w-full">Edad:</label>
+          <input id="branch" formControlName="age" type="number"
+            class="bg-transparent border-[1px] border-blue-400 bg-blue-100 rounded-lg px-2 text-base w-full py-[2.5px]" />
+          <div *ngIf="isRequiredField('age')" class="text-red-500 text-sm font-semibold">
+            {{isRequiredField('age')}}
+          </div>
+          <div *ngIf="isMax('age')" class="text-red-500 text-sm font-semibold">
+            {{isMax('age')}}
+          </div>
+          <div *ngIf="isMin('age')" class="text-red-500 text-sm font-semibold">
+            {{isMin('age')}}
+          </div>
+        </div>
+      </form>
+      <!--footer-->
+      <div class="flex items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
+        <button
+          class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button" (click)="toggleModal()">
+          Cancelar
+        </button>
+        <button
+          class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button" (click)="onSubmit()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

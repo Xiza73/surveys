@@ -1,0 +1,33 @@
+<section class="w-full flex flex-col">
+  <div class="flex justify-center items-center">
+    <span class="font-bold text-lg mr-4">Sucursal:</span>
+    <select id="person" [ngModel]="selectedBranchId" (ngModelChange)="onBranchChange($event)"
+      class="bg-blue-200 border-[1px] border-blue-400 rounded-lg px-2 text-base w-72 py-[2.5px]">
+      <option *ngFor="let branch of branches" [value]="branch.idBranch">{{branch.name}}</option>
+    </select>
+  </div>
+  <div class="flex justify-center items-center mt-4">
+    <span class="font-bold text-lg mr-4">Cantidad de encuestas: {{surveys.length}}</span>
+  </div>
+  <div class="flex flex-col justify-center items-center w-full p-5">
+    <span class="font-bold text-4xl underline mb-4">Encuestas</span>
+    <table class="table-auto">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Fecha</th>
+          <th class="px-4 py-2">Encuestado</th>
+          <th class="px-4 py-2">Sucursal</th>
+          <th class="px-4 py-2">Aceptación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let survey of surveys">
+          <td class="border px-4 py-2">{{survey.date | date}}</td>
+          <td class="border px-4 py-2">{{survey.person}}</td>
+          <td class="border px-4 py-2">{{survey.branch}}</td>
+          <td class="border px-4 py-2">{{survey.percentage}}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
